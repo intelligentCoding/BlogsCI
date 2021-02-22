@@ -1,20 +1,27 @@
 const puppeteer = require('puppeteer')
 
+let browser, page;
 
-// test('Add two numbers', () => {
-//     const sum = 1 + 2;
-
-//     expect(sum).toEqual(3);
-// });
-
-test('we can launch a browser', async () => {
-    const browser = await puppeteer.launch({
+beforeEach ( async ()=> {
+    browser = await puppeteer.launch({
         headless: false
     });
-    const page = await browser.newPage();
+    page = await browser.newPage();
     await page.goto('localhost:3000');
+})
+
+afterEach ( async ()=>{
+    await browser.close();
+})
+test('the header has the correct text for logo', async () => {
 
     const text = await page.$eval('a.brand-logo', el => el.innerHTML);
     expect(text).toEqual("Blogster");
 
+})
+
+test('clicking login to start Oauth flow', async () => {
+    await page.click('.right a');
+    const url = await page.url();
+    expect(url).toMatch(/accounts\.google\.com/)
 })
