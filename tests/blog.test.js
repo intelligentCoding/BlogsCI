@@ -90,13 +90,4 @@ describe('User not logged in', async () => {
         }
     })
 
-    // test('USer cannot create blogs ', async () =>{
-    //     const result = await page.post('/api/blogs', {title: 'title', content: 'content'})
-    //     expect(result).toEqual({error: 'You must log in!'});
-    // })
-
-    // test('user can not see the blogs', async()=> {
-    //     const result = await page.get('/api/blogs')
-    //         expect(result).toEqual({error: 'You must log in!'});
-    // })
 })
